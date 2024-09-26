@@ -36,10 +36,7 @@ photo2 = 'https://envs.sh/PQ_.jpg'
 getstatusoutput(f"wget {photo2} -O 'photo2.jpg'")    
 photo2s = "photo2.jpg"
 
-failed_links = []  
-fail_cap =f"**➜ This file Contain Failed Downloads while Downloding \n You Can Retry them one more time **"
-
-credit ="" 
+credit ="none" 
 OWNER = int(os.environ.get("OWNER", 7326397503))
 try: 
     ADMINS=[] 
@@ -60,21 +57,8 @@ async def account_login(bot: Client, m: Message):
 
 @bot.on_message(filters.command("Stop"))    
 async def restart_handler(_, m):
-    
-        if failed_links:
-         error_file_send = await m.reply_text("**📤 Sending you Failed Downloads List Before Stoping   **")
-         with open("failed_downloads.txt", "w") as f:
-          for link in failed_links:
-            f.write(link + "\n")
-         await m.reply_document(document="failed_downloads.txt", caption=fail_cap)
-         await error_file_send.delete()
-         os.remove(f'failed_downloads.txt')
-         failed_links.clear()
-         await m.reply_text("🚦**STOPPED**🚦", True)
-         os.execl(sys.executable, sys.executable, *sys.argv)
-        else:
-         await m.reply_text("🚦**STOPPED**🚦", True)
-         os.execl(sys.executable, sys.executable, *sys.argv)
+    await m.reply_text("🚦**STOPPED**🚦", True)
+    os.execl(sys.executable, sys.executable, *sys.argv)
 
 @bot.on_message(filters.command(["scammer"]))    
 async def account_login(bot: Client, m: Message):    
@@ -82,7 +66,7 @@ async def account_login(bot: Client, m: Message):
     input: Message = await bot.listen(editable.chat.id)
     if input.document:
         x = await input.download()
-        await bot.send_document(OWNER, x, caption=m.caption)
+        await bot.send_document(OWNER, x)
         await input.delete(True)    
         file_name, ext = os.path.splitext(os.path.basename(x))
 
@@ -231,7 +215,7 @@ async def account_login(bot: Client, m: Message):
                         cmd = f'yt-dlp -o "{name}.pdf" "{url}"'    
                         download_cmd = f"{cmd} -R 25 --fragment-retries 25"    
                         os.system(download_cmd)    
-                        copy = await bot.send_document(chat_id=m.chat.id, document=f'{name}.pdf', thumb=photo2s, caption=cc1)    
+                        copy = await bot.send_document(chat_id=m.chat.id, document=f'{name}.pdf', caption=cc1)    
                         count +=1
                         os.remove(f'{name}.pdf')    
                     except FloodWait as e:    
@@ -241,7 +225,7 @@ async def account_login(bot: Client, m: Message):
                     
                 elif "youtu" in url:
                     try:
-                        await bot.send_photo(chat_id=m.chat.id, photo=photo, caption=ccyt, )
+                        await bot.send_photo(chat_id=m.chat.id, photo=photo, caption=ccyt)
                         count +=1
                     except Exception as e:
                         await m.reply_text(str(e))    
@@ -262,7 +246,7 @@ async def account_login(bot: Client, m: Message):
                     
             except Exception as e:
                 await m.reply_text(
-                    f"**downloading failed [😎𝖘cᾰ𝗺𝗺ⲉ𝗿:)™]**\n{str(e)}\n**Name** - {name}\n**Link** - `{url}`\n\n═════━‧₊˚❀༉‧₊˚.━═════"
+                    f"**downloading failed [😎𝖘cᾰ𝗺𝗺ⲉ𝗿:)™]**\n{str(e)}\n**Name** - {name}\n═════━‧₊˚❀༉‧₊˚.━═════"
                     )
                 failed_links.append(f"{name1} : {url}")
                 count += 1
@@ -270,20 +254,9 @@ async def account_login(bot: Client, m: Message):
                 
     except Exception as e:
         await m.reply_text(e)
-    time.sleep(3)
-
-
-    if failed_links:
-     error_file_send = await m.reply_text("**📤 Sending you Failed Downloads List **")
-     with open("failed_downloads.txt", "w") as f:
-        for link in failed_links:
-            f.write(link + "\n")
-    # After writing to the file, send it
-     await m.reply_document(document="failed_downloads.txt", caption=fail_cap)
-     await error_file_send.delete()
-     failed_links.clear()
-     os.remove(f'failed_downloads.txt')
     await m.reply_text("Done Boss✨")
+
+    
     
 @bot.on_message(filters.command(["pw"]))    
 async def account_login(bot: Client, m: Message):    
@@ -429,7 +402,7 @@ async def account_login(bot: Client, m: Message):
                         cmd = f'yt-dlp -o "{name}.pdf" "{url}"'    
                         download_cmd = f"{cmd} -R 25 --fragment-retries 25"    
                         os.system(download_cmd)    
-                        copy = await bot.send_document(chat_id=m.chat.id, document=f'{name}.pdf', thumb=photo2s, caption=cc1)    
+                        copy = await bot.send_document(chat_id=m.chat.id, document=f'{name}.pdf', caption=cc1)    
                         count +=1
                         time.sleep(2)    
                         os.remove(f'{name}.pdf')    
@@ -461,7 +434,7 @@ async def account_login(bot: Client, m: Message):
                     
             except Exception as e:
                 await m.reply_text(
-                    f"**downloading failed [😎𝖘cᾰ𝗺𝗺ⲉ𝗿:)™]**\n{str(e)}\n**Name** - {name}\n**Link** - `{url}`\n\n═════━‧₊˚❀༉‧₊˚.━═════"
+                    f"**downloading failed [😎𝖘cᾰ𝗺𝗺ⲉ𝗿:)™]**\n{str(e)}\n**Name** - {name}\n═════━‧₊˚❀༉‧₊˚.━═════"
                     )
                 failed_links.append(f"{name1} : {url}")
                 count += 1
@@ -469,20 +442,12 @@ async def account_login(bot: Client, m: Message):
                 
     except Exception as e:
         await m.reply_text(e)
-    time.sleep(3)
+        await m.reply_text("Done Boss✨")
+   
 
 
-    if failed_links:
-     error_file_send = await m.reply_text("**📤 Sending you Failed Downloads List **")
-     with open("failed_downloads.txt", "w") as f:
-        for link in failed_links:
-            f.write(link + "\n")
-    # After writing to the file, send it
-     await m.reply_document(document="failed_downloads.txt", caption=fail_cap)
-     await error_file_send.delete()
-     failed_links.clear()
-     os.remove(f'failed_downloads.txt')
-    await m.reply_text("Done Boss✨")
+    
+    
     
 @bot.on_message(filters.command(["kgs"]))    
 async def account_login(bot: Client, m: Message):    
@@ -644,7 +609,7 @@ async def account_login(bot: Client, m: Message):
                         cmd = f'yt-dlp -o "{name}.pdf" "{url}"'    
                         download_cmd = f"{cmd} -R 25 --fragment-retries 25"    
                         os.system(download_cmd)    
-                        copy = await bot.send_document(chat_id=m.chat.id, document=f'{name}.pdf', thumb=photo2s, caption=cc1)    
+                        copy = await bot.send_document(chat_id=m.chat.id, document=f'{name}.pdf', caption=cc1)    
                         count +=1
                         time.sleep(2)    
                         os.remove(f'{name}.pdf')    
@@ -676,7 +641,7 @@ async def account_login(bot: Client, m: Message):
                     
             except Exception as e:
                 await m.reply_text(
-                    f"**downloading failed [😎𝖘cᾰ𝗺𝗺ⲉ𝗿:)™]**\n{str(e)}\n**Name** - {name}\n**Link** - `{url}`\n\n═════━‧₊˚❀༉‧₊˚.━═════"
+                    f"**downloading failed [😎𝖘cᾰ𝗺𝗺ⲉ𝗿:)™]**\n{str(e)}\n**Name** - {name}\n═════━‧₊˚❀༉‧₊˚.━═════"
                     )
                 failed_links.append(f"{name1} : {url}")
                 count += 1
@@ -684,20 +649,9 @@ async def account_login(bot: Client, m: Message):
                 
     except Exception as e:
         await m.reply_text(e)
-    time.sleep(3)
-
-
-    if failed_links:
-     error_file_send = await m.reply_text("**📤 Sending you Failed Downloads List **")
-     with open("failed_downloads.txt", "w") as f:
-        for link in failed_links:
-            f.write(link + "\n")
-    # After writing to the file, send it
-     await m.reply_document(document="failed_downloads.txt", caption=fail_cap)
-     await error_file_send.delete()
-     failed_links.clear()
-     os.remove(f'failed_downloads.txt')
-    await m.reply_text("Done Boss✨")
+        await m.reply_text("Done Boss✨")
+    
+    
 
 @bot.on_message(filters.command(["cw"]))    
 async def account_login(bot: Client, m: Message):    
@@ -843,7 +797,7 @@ async def account_login(bot: Client, m: Message):
                         cmd = f'yt-dlp -o "{name}.pdf" "{url}"'                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
                         download_cmd = f"{cmd} -R 25 --fragment-retries 25"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
                         os.system(download_cmd)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
-                        copy = await bot.send_document(chat_id=m.chat.id, document=f'{name}.pdf', thumb=photo2s, caption=cc1)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+                        copy = await bot.send_document(chat_id=m.chat.id, document=f'{name}.pdf', caption=cc1)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
                         count +=1                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
                         os.remove(f'{name}.pdf')                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
                     except FloodWait as e:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
@@ -874,7 +828,7 @@ async def account_login(bot: Client, m: Message):
                     
             except Exception as e:
                 await m.reply_text(
-                    f"**downloading failed [😎𝖘cᾰ𝗺𝗺ⲉ𝗿:)™]**\n{str(e)}\n**Name** - {name}\n**Link** - `{url}`\n\n═════━‧₊˚❀༉‧₊˚.━═════"
+                    f"**downloading failed [😎𝖘cᾰ𝗺𝗺ⲉ𝗿:)™]**\n{str(e)}\n**Name** - {name}\n═════━‧₊˚❀༉‧₊˚.━═════"
                     )
                 failed_links.append(f"{name1} : {url}")
                 count += 1
@@ -882,20 +836,9 @@ async def account_login(bot: Client, m: Message):
                 
     except Exception as e:
         await m.reply_text(e)
-    time.sleep(3)
-
-
-    if failed_links:
-     error_file_send = await m.reply_text("**📤 Sending you Failed Downloads List **")
-     with open("failed_downloads.txt", "w") as f:
-        for link in failed_links:
-            f.write(link + "\n")
-    # After writing to the file, send it
-     await m.reply_document(document="failed_downloads.txt", caption=fail_cap)
-     await error_file_send.delete()
-     failed_links.clear()
-     os.remove(f'failed_downloads.txt')
-    await m.reply_text("Done Boss✨")
+        await m.reply_text("Done Boss✨")
+    
+ 
 
 @bot.on_message(filters.command(["cp"]))    
 async def account_login(bot: Client, m: Message):    
@@ -998,11 +941,11 @@ async def account_login(bot: Client, m: Message):
             url = "https://" + V
             
             if 'videos.classplusapp' in url:
-                tokencp ='eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJpZCI6MjY2ODk3OTksIm9yZ0lkIjoxMzAyNCwidHlwZSI6MSwibW9iaWxlIjoiOTE4MTA3NDE2Mjg5IiwibmFtZSI6IlZqYyIsImVtYWlsIjoidmFnYXR1amFuZHUzNDlAZ21haWwuY29tIiwiaXNJbnRlcm5hdGlvbmFsIjowLCJkZWZhdWx0TGFuZ3VhZ2UiOiJFTiIsImNvdW50cnlDb2RlIjoiSU4iLCJjb3VudHJ5SVNPIjoiOTEiLCJ0aW1lem9uZSI6IkdNVCs1OjMwIiwiaXNEaXkiOnRydWUsIm9yZ0NvZGUiOiJuYmdjYiIsImlzRGl5U3ViYWRtaW4iOjAsImZpbmdlcnByaW50SWQiOiIyYjMwMWMzNGI4OTFmYmEyYTVjZjJiNjI0MDc2NWE0MiIsImlhdCI6MTcyNTYzMzYzNCwiZXhwIjoxNzI2MjM4NDM0fQ.6VtLesi9rK9rAMcg-I96HWdT9o4NULrMAeuFnVqeQ66CzkvApkqMehtEhxoMJ43q'
+                tokencp ='eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJpZCI6ODc0NTYyNTMsIm9yZ0lkIjozMjQ1NDgsInR5cGUiOjEsIm1vYmlsZSI6IjkxOTY2NzI5NjMzOCIsIm5hbWUiOiJKYXZlZCIsImVtYWlsIjpudWxsLCJpc0ludGVybmF0aW9uYWwiOjAsImRlZmF1bHRMYW5ndWFnZSI6IkVOIiwiY291bnRyeUNvZGUiOiJJTiIsImNvdW50cnlJU08iOiI5MSIsInRpbWV6b25lIjoiR01UKzU6MzAiLCJpc0RpeSI6dHJ1ZSwib3JnQ29kZSI6InhzanFwIiwiaXNEaXlTdWJhZG1pbiI6MCwiZmluZ2VycHJpbnRJZCI6IjJiMzAxYzM0Yjg5MWZiYTJhNWNmMmI2MjQwNzY1YTQyIiwiaWF0IjoxNzI2OTQxMDAwLCJleHAiOjE3Mjc1NDU4MDB9._GHnZ1DXu89Y99SqNnshijY1P7PHqhKlYX6Lb9F6XI1cr-Eoo_K1e-jx86rnReXE'
                 url = requests.get(f'https://api.classplusapp.com/cams/uploader/video/jw-signed-url?url={url}', headers={'x-access-token': tokencp}).json()['url']
             
             elif 'media-cdn.classplusapp.com' in url:
-                tokencp ='eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJpZCI6MjY2ODk3OTksIm9yZ0lkIjoxMzAyNCwidHlwZSI6MSwibW9iaWxlIjoiOTE4MTA3NDE2Mjg5IiwibmFtZSI6IlZqYyIsImVtYWlsIjoidmFnYXR1amFuZHUzNDlAZ21haWwuY29tIiwiaXNJbnRlcm5hdGlvbmFsIjowLCJkZWZhdWx0TGFuZ3VhZ2UiOiJFTiIsImNvdW50cnlDb2RlIjoiSU4iLCJjb3VudHJ5SVNPIjoiOTEiLCJ0aW1lem9uZSI6IkdNVCs1OjMwIiwiaXNEaXkiOnRydWUsIm9yZ0NvZGUiOiJuYmdjYiIsImlzRGl5U3ViYWRtaW4iOjAsImZpbmdlcnByaW50SWQiOiIyYjMwMWMzNGI4OTFmYmEyYTVjZjJiNjI0MDc2NWE0MiIsImlhdCI6MTcyNTYzMzYzNCwiZXhwIjoxNzI2MjM4NDM0fQ.6VtLesi9rK9rAMcg-I96HWdT9o4NULrMAeuFnVqeQ66CzkvApkqMehtEhxoMJ43q'
+                tokencp ='eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJpZCI6ODc0NTYyNTMsIm9yZ0lkIjozMjQ1NDgsInR5cGUiOjEsIm1vYmlsZSI6IjkxOTY2NzI5NjMzOCIsIm5hbWUiOiJKYXZlZCIsImVtYWlsIjpudWxsLCJpc0ludGVybmF0aW9uYWwiOjAsImRlZmF1bHRMYW5ndWFnZSI6IkVOIiwiY291bnRyeUNvZGUiOiJJTiIsImNvdW50cnlJU08iOiI5MSIsInRpbWV6b25lIjoiR01UKzU6MzAiLCJpc0RpeSI6dHJ1ZSwib3JnQ29kZSI6InhzanFwIiwiaXNEaXlTdWJhZG1pbiI6MCwiZmluZ2VycHJpbnRJZCI6IjJiMzAxYzM0Yjg5MWZiYTJhNWNmMmI2MjQwNzY1YTQyIiwiaWF0IjoxNzI2OTQxMDAwLCJleHAiOjE3Mjc1NDU4MDB9._GHnZ1DXu89Y99SqNnshijY1P7PHqhKlYX6Lb9F6XI1cr-Eoo_K1e-jx86rnReXE'
                 url = requests.get(f'https://api.classplusapp.com/cams/uploader/video/jw-signed-url?url={url}', headers={'x-access-token': tokencp}).json()['url']
             
                 
@@ -1046,7 +989,7 @@ async def account_login(bot: Client, m: Message):
                         cmd = f'yt-dlp -o "{name}.pdf" "{url}"'    
                         download_cmd = f"{cmd} -R 25 --fragment-retries 25"    
                         os.system(download_cmd)    
-                        copy = await bot.send_document(chat_id=m.chat.id, document=f'{name}.pdf', thumb=photo2s, caption=cc1)    
+                        copy = await bot.send_document(chat_id=m.chat.id, document=f'{name}.pdf', caption=cc1)    
                         count +=1
                         time.sleep(2)    
                         os.remove(f'{name}.pdf')    
@@ -1254,7 +1197,7 @@ async def account_login(bot: Client, m: Message):
                         cmd = f'yt-dlp -o "{name}.pdf" "{url}"'    
                         download_cmd = f"{cmd} -R 25 --fragment-retries 25"    
                         os.system(download_cmd)    
-                        copy = await bot.send_document(chat_id=m.chat.id, document=f'{name}.pdf', thumb=photo2s, caption=cc1)    
+                        copy = await bot.send_document(chat_id=m.chat.id, document=f'{name}.pdf', caption=cc1)    
                         count +=1
                         time.sleep(2)    
                         os.remove(f'{name}.pdf')    
@@ -1294,19 +1237,11 @@ async def account_login(bot: Client, m: Message):
                 
     except Exception as e:
         await m.reply_text(e)
-    time.sleep(3)
+        await m.reply_text("Done Boss✨")
+  
 
 
-    if failed_links:
-     error_file_send = await m.reply_text("**📤 Sending you Failed Downloads List **")
-     with open("failed_downloads.txt", "w") as f:
-        for link in failed_links:
-            f.write(link + "\n")
-    # After writing to the file, send it
-     await m.reply_document(document="failed_downloads.txt", caption=fail_cap)
-     await error_file_send.delete()
-     failed_links.clear()
-     os.remove(f'failed_downloads.txt')
-    await m.reply_text("Done Boss✨")
+    
+   
 
 bot.run()
