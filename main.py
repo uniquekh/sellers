@@ -279,8 +279,6 @@ async def account_login(bot: Client, m: Message):
                 await m.reply_text(
                     f"**downloading failed [😎𝖘cᾰ𝗺𝗺ⲉ𝗿:)™]**\n{str(e)}\n**Name** - {name}\n═════━‧₊˚❀༉‧₊˚.━═════"
                     )
-                failed_links.append(f"{name1} : {url}")
-                count += 1
                 continue
                 
     except Exception as e:
@@ -467,8 +465,6 @@ async def account_login(bot: Client, m: Message):
                 await m.reply_text(
                     f"**downloading failed [😎𝖘cᾰ𝗺𝗺ⲉ𝗿:)™]**\n{str(e)}\n**Name** - {name}\n═════━‧₊˚❀༉‧₊˚.━═════"
                     )
-                failed_links.append(f"{name1} : {url}")
-                count += 1
                 continue
                 
     except Exception as e:
@@ -674,8 +670,6 @@ async def account_login(bot: Client, m: Message):
                 await m.reply_text(
                     f"**downloading failed [😎𝖘cᾰ𝗺𝗺ⲉ𝗿:)™]**\n{str(e)}\n**Name** - {name}\n═════━‧₊˚❀༉‧₊˚.━═════"
                     )
-                failed_links.append(f"{name1} : {url}")
-                count += 1
                 continue
                 
     except Exception as e:
@@ -861,8 +855,6 @@ async def account_login(bot: Client, m: Message):
                 await m.reply_text(
                     f"**downloading failed [😎𝖘cᾰ𝗺𝗺ⲉ𝗿:)™]**\n{str(e)}\n**Name** - {name}\n═════━‧₊˚❀༉‧₊˚.━═════"
                     )
-                failed_links.append(f"{name1} : {url}")
-                count += 1
                 continue
                 
     except Exception as e:
@@ -1054,26 +1046,11 @@ async def account_login(bot: Client, m: Message):
                 await m.reply_text(
                     f"**downloading failed [😎𝖘cᾰ𝗺𝗺ⲉ𝗿:)™]**\n{str(e)}\n**Name** - {name}\n**Link** - `{url}`\n\n═════━‧₊˚❀༉‧₊˚.━═════"
                     )
-                failed_links.append(f"{name1} : {url}")
-                count += 1
                 continue
                 
     except Exception as e:
         await m.reply_text(e)
-    time.sleep(3)
-
-
-    if failed_links:
-     error_file_send = await m.reply_text("**📤 Sending you Failed Downloads List **")
-     with open("failed_downloads.txt", "w") as f:
-        for link in failed_links:
-            f.write(link + "\n")
-    # After writing to the file, send it
-     await m.reply_document(document="failed_downloads.txt", caption=fail_cap)
-     await error_file_send.delete()
-     failed_links.clear()
-     os.remove(f'failed_downloads.txt')
-    await m.reply_text("Done Boss✨")
+        await m.reply_text("Done Boss✨")
     
 @bot.on_message(filters.command(["ut"]))    
 async def account_login(bot: Client, m: Message):    
@@ -1262,9 +1239,8 @@ async def account_login(bot: Client, m: Message):
                 await m.reply_text(
                     f"**downloading failed [😎𝖘cᾰ𝗺𝗺ⲉ𝗿:)™]**\n{str(e)}\n**Name** - {name}\n**Link** - `{url}`\n\n═════━‧₊˚❀༉‧₊˚.━═════"
                     )
-                failed_links.append(f"{name1} : {url}")
-                count += 1
                 continue
+               
                 
     except Exception as e:
         await m.reply_text(e)
