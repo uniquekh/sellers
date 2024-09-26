@@ -46,15 +46,46 @@ except ValueError:
         raise Exception("Your Admins list does not contain valid integers.") 
 ADMINS.append(OWNER)
 
+keyboard = InlineKeyboardMarkup(
+    [
+        [
+            InlineKeyboardButton(
+                text="❤️‍🔥 Devloper",
+                url="https://t.me/scammer_botxz",
+            ),
+            InlineKeyboardButton(
+                text="✨ Backup Channel",
+                url="https://t.me/scammer_batches",
+            ),
+        ],
+        [
+            InlineKeyboardButton(
+                text="💫 Updates Channel",
+                url="https://t.me/scammer_botxz1",
+            ),
+            
+        ],
+    ]
+)
+
+photostart = 'https://envs.sh/qMe.jpg'
+getstatusoutput(f"wget {photostart} -O 'photostart.jpg'")    
+photostar= "photostart.jpg"
+
 bot = Client("bot",    
              bot_token=os.environ.get("BOT_TOKEN"),                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  #Bot Created by @NtrRazYt
              api_id=int(os.environ.get("API_ID")),                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  #Bot Created by @NtrRazYt
              api_hash=os.environ.get("API_HASH"))
 
-@bot.on_message(filters.command(["start"]))    
-async def account_login(bot: Client, m: Message):    
-    editable = await m.reply_text("**👋 ʜᴇʟʟᴏ!\n🌟ɪ ᴀᴍ ᴛxᴛ ꜰɪʟᴇ ᴅᴏᴡʟᴏᴀᴅᴇʀ ʙᴏᴛ** \n\n❤️‍🔥 **ᴘʀᴇꜱꜱ /scammer ᴛᴏ ᴅᴏᴡɴʟᴏᴀᴅ ᴠɪᴅᴇᴏ ʙʏ ᴛxᴛ**\n\n❤️‍🩹 **ᴊᴏɪɴ ᴏᴜʀ <a href='https://t.me/scammer_botz'>ᴛᴇʟᴇɢʀᴀᴍ ᴄʜᴀɴɴᴇʟ</a>** \n\n💗 ᴘᴏᴡᴇʀᴇᴅ ʙʏ : <a href='https://t.me/scammer_botz'> </a>\n-═════━‧₊˚❀༉‧₊˚.━═════-") 
+captt = "**👋 ʜᴇʟʟᴏ!\n\n🌟ɪ ᴀᴍ ᴛxᴛ ꜰɪʟᴇ ᴅᴏᴡʟᴏᴀᴅᴇʀ ʙᴏᴛ** \n\n❤️‍🔥 **ᴘʀᴇꜱꜱ /scammer ᴛᴏ ᴅᴏᴡɴʟᴏᴀᴅ ᴠɪᴅᴇᴏ ʙʏ ᴛxᴛ**\n\n❤️‍🩹 **ᴊᴏɪɴ ᴏᴜʀ <a href='https://t.me/scammer_botxz1'>ᴛᴇʟᴇɢʀᴀᴍ ᴄʜᴀɴɴᴇʟ</a>** \n\n💗 ᴘᴏᴡᴇʀᴇᴅ ʙʏ : <a href='https://t.me/Scammer_botxz'>😎𝖘cᾰ𝗺𝗺ⲉ𝗿:)™~ </a>\n-═════━‧₊˚❀༉‧₊˚.━═════-"
 
+@bot.on_message(filters.command(["start"]))    
+async def account_login(bot: Client, m: Message): 
+    edit = await m.reply_text('💫')
+    time.sleep(3)
+    await edit.delete()   
+    await bot.send_photo(chat_id=m.chat.id, photo=photostar, caption=captt, reply_markup=keyboard) 
+    
 @bot.on_message(filters.command("Stop"))    
 async def restart_handler(_, m):
     await m.reply_text("🚦**STOPPED**🚦", True)
